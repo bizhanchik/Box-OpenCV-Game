@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор игры</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            background-color: #444;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #video-container {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 320px;
+            height: 240px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #video-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Выберите игру</h1>
+        <p>Используйте жесты или кнопки для выбора игры.</p>
+        <form action="/start" method="post">
+            <button type="submit" name="game" value="boxing">Бокс</button>
+            <button type="submit" name="game" value="snake">Змейка</button>
+        </form>
+        <p id="selected-game"></p>
+    </div>
+    <div id="video-container">
+        <img src="{{ url_for('video_feed') }}" alt="Video Stream">
+    </div>
+
+    <script>
+        function fetchSelectedGame() {
+            fetch('/selected_game')
+                .then(response => response.json())
+                .then(data => {
+                    const selectedGameElement = document.querySelector('#selected-game');
+                    if (data.selected_game) {
+                        selectedGameElement.textContent = `Вы выбрали игру: ${data.selected_game}`;
+                    }
+    
+                    if (data.selected_game === 'boxing') {
+                        window.location.href = '/box/';
+                    } else if (data.selected_game === 'snake') {
+                        window.location.href = '/snake';
+                    }
+                });
+        }
+    
+        setInterval(fetchSelectedGame, 2000);
+    </script>
+    
+</body>
+</html>

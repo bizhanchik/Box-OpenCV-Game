@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thug Life Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        img {
+            border: 5px solid #fff;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 640px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Box With Thugs (easy)</h1>
+        <p>Побей всех плохишей!</p>
+        <div>
+            <img id="video-stream" src="{{ url_for('box.video_feed') }}" alt="Boxing Game Stream">
+        </div>
+    </div>
+</body>
+</html>

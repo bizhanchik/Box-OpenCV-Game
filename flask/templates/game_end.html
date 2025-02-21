@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            margin: 100px auto;
+            width: 50%;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #444;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game Over</h1>
+        <p id="result-text"></p>
+        <button onclick="window.location.href='/'">Главное меню</button>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const score = parseInt(params.get("score"), 10);
+        const miss = parseInt(params.get("miss"), 10);
+
+        const resultText = (score >= 20) ? "You won!" : (miss >= 10) ? "You lose!!" : "Game Over";
+        document.getElementById("result-text").textContent = resultText;
+    </script>
+</body>
+</html>
